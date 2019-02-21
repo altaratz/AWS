@@ -1,0 +1,476 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Provides nesting for required stacks to deploy a full sample web application with reverse proxy, ELBs, IAM, and other resources (for demonstration/POC/testing) QS(0016)",
+    "Metadata": {
+        "Stack": {
+            "Value": 3
+        },
+        "VersionDate": {
+            "Value": 20160510
+        },
+        "Identifier": {
+            "Value": "template-application"
+        },
+        "Input": {
+            "Description": "VPC, SubnetIDs, S3 bucket names, CIDR blocks, KeyNames, AMIs, DB name and password"
+        },
+        "Output": {
+            "Description": "Outputs ID of all deployed resources"
+        },
+        "AWS::CloudFormation::Interface": {
+            "ParameterGroups": [
+                {
+                    "Label": {
+                        "default": "Region Config"
+                    },
+                    "Parameters": [
+                        "pRegionAZ1Name",
+                        "pRegionAZ2Name"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "Network (existing VPC config)"
+                    },
+                    "Parameters": [
+                        "pProductionCIDR",
+                        "pProductionVPC",
+                        "pDMZSubnetA",
+                        "pDMZSubnetB",
+                        "pAppPrivateSubnetA",
+                        "pAppPrivateSubnetB"
+                    ]
+                }
+
+            ]
+        }
+    },
+    "Parameters": {
+        "pSecurityAlarmTopic": {
+            "Description": "SNS topic for alarms and notifications",
+            "Type": "String",
+            "Default": ""
+        },
+        "pEC2KeyPair": {
+            "Description": "Key Name for Instance",
+            "Type": "String",
+            "Default": ""
+        },
+        "pProductionCIDR": {
+            "Description": "Production VPC CIDR",
+            "Type": "String"
+        },
+        "pManagementCIDR": {
+            "Description": "Management VPC CIDR",
+            "Type": "String"
+        },
+        "pProductionVPC": {
+            "Description": "Production VPC",
+            "Type": "AWS::EC2::VPC::Id"
+        },
+        "pBastionSSHCIDR": {
+            "Description": "CIDR block (optional) of Public IPs allowed to access Bastion instance in this deployment",
+            "Type": "String",
+            "Default": "0.0.0.0/0"
+        },
+        "pDMZSubnetA": {
+            "Description": "DMZ Subnet A",
+            "Type": "AWS::EC2::Subnet::Id"
+        },
+        "pDMZSubnetB": {
+            "Description": "DMZ Subnet B",
+            "Type": "AWS::EC2::Subnet::Id"
+        },
+        "pAppPrivateSubnetA": {
+            "Description": "WebApp Subnet A",
+            "Type": "AWS::EC2::Subnet::Id"
+        },
+        "pAppPrivateSubnetB": {
+            "Description": "WebApp Subnet A",
+            "Type": "AWS::EC2::Subnet::Id"
+        },
+        "pRegionAZ1Name": {
+            "Description": "rDBPrivateSubnetB",
+            "Type": "AWS::EC2::AvailabilityZone::Name"
+        },
+        "pRegionAZ2Name": {
+            "Description": "rDBPrivateSubnetB",
+            "Type": "AWS::EC2::AvailabilityZone::Name"
+        },
+        "pEnvironment": {
+            "Description": "Environment type (development, test, or production)",
+            "Type": "String",
+            "Default": "development"
+        },
+        "pSupportsGlacier": {
+            "Description": "Determines whether this region supports Glacier (passed in from main template)",
+            "Type": "String",
+            "Default": "true"
+        }
+    },
+    "Conditions": {
+        "GovCloudCondition": {
+            "Fn::Equals": [
+                {
+                    "Ref": "AWS::Region"
+                },
+                "us-gov-west-1"
+            ]
+        },
+        "SupportsGlacier": {
+            "Fn::Equals": [
+                {
+                    "Ref": "pSupportsGlacier"
+                },
+                "true"
+            ]
+        }
+    },
+    "Resources": {
+        "rS3ELBAccessLogs": {
+            "Type": "AWS::S3::Bucket",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+                "AccessControl": "Private"
+            }
+        },
+        "rSecurityGroupWeb": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Security group for Reverse Proxy in DMZ",
+                "VpcId": {
+                    "Ref": "pProductionVPC"
+                },
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 443,
+                        "ToPort": 443,
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "SecurityGroupEgress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 80,
+                        "ToPort": 80,
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 443,
+                        "ToPort": 443,
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "sg-reverse-proxy-dmz"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": {
+                            "Ref": "pEnvironment"
+                        }
+                    }
+                ]
+            }
+        },
+        "rSecurityGroupWebInstance": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Security group for Reverse Proxy Instances in DMZ",
+                "VpcId": {
+                    "Ref": "pProductionVPC"
+                },
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 443,
+                        "ToPort": 443,
+                        "CidrIp": {
+                            "Ref": "pProductionCIDR"
+                        }
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 80,
+                        "ToPort": 80,
+                        "CidrIp": {
+                            "Ref": "pProductionCIDR"
+                        }
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 22,
+                        "ToPort": 22,
+                        "CidrIp": {
+                            "Ref": "pManagementCIDR"
+                        }
+                    }
+                ],
+                "SecurityGroupEgress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 80,
+                        "ToPort": 80,
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 443,
+                        "ToPort": 443,
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "udp",
+                        "FromPort": 123,
+                        "ToPort": 123,
+                        "CidrIp": {
+                            "Ref": "pProductionCIDR"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "sg-reverse-proxy-dmz-instances"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": {
+                            "Ref": "pEnvironment"
+                        }
+                    }
+                ]
+            }
+        },
+        "rSecurityGroupApp": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Security group for Appservers ELB",
+                "VpcId": {
+                    "Ref": "pProductionVPC"
+                },
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 443,
+                        "ToPort": 443,
+                        "CidrIp": {
+                            "Ref": "pProductionCIDR"
+                        }
+                    }
+                ],
+                "SecurityGroupEgress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 443,
+                        "ToPort": 443,
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 80,
+                        "ToPort": 80,
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "sg-app-server-elb"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": {
+                            "Ref": "pEnvironment"
+                        }
+                    }
+                ]
+            }
+        },
+        "rSecurityGroupAppInstance": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Security group for Appserver Instances",
+                "VpcId": {
+                    "Ref": "pProductionVPC"
+                },
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 443,
+                        "ToPort": 443,
+                        "CidrIp": {
+                            "Ref": "pProductionCIDR"
+                        }
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 80,
+                        "ToPort": 80,
+                        "CidrIp": {
+                            "Ref": "pProductionCIDR"
+                        }
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 22,
+                        "ToPort": 22,
+                        "CidrIp": {
+                            "Ref": "pManagementCIDR"
+                        }
+                    }
+                ],
+                "SecurityGroupEgress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 80,
+                        "ToPort": 80,
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 443,
+                        "ToPort": 443,
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "udp",
+                        "FromPort": 123,
+                        "ToPort": 123,
+                        "CidrIp": {
+                            "Ref": "pProductionCIDR"
+                        }
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 3306,
+                        "ToPort": 3306,
+                        "CidrIp": {
+                            "Ref": "pProductionCIDR"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "sg-app-server-elb-instances"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": {
+                            "Ref": "pEnvironment"
+                        }
+                    }
+                ]
+            }
+        },
+        "rWebContentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+                "AccessControl": "Private",
+                "LifecycleConfiguration": {
+                    "Rules": [
+                        {
+                            "Id": "Transition90daysRetain7yrs",
+                            "Status": "Enabled",
+                            "ExpirationInDays": 2555,
+                            "Transition": {
+                                "TransitionInDays": 90,
+                                "StorageClass": {
+                                    "Fn::If": [
+                                        "SupportsGlacier",
+                                        "GLACIER",
+                                        "STANDARD_IA"
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                "VersioningConfiguration": {
+                    "Status": "Enabled"
+                }
+            },
+            "DeletionPolicy": "Delete"
+        },
+        "rWebContentS3Policy": {
+            "Type": "AWS::S3::BucketPolicy",
+            "DependsOn": "rWebContentBucket",
+            "Properties": {
+                "Bucket": {
+                    "Ref": "rWebContentBucket"
+                },
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Sid": "EnforceSecureTransport",
+                            "Action": "s3:*",
+                            "Effect": "Deny",
+                            "Principal": "*",
+                            "Resource": {
+                                "Fn::Sub": [
+                                    "arn:${Partition}:s3:::${rWebContentBucket}",
+                                    {
+                                        "Partition": {
+                                            "Fn::If": [
+                                                "GovCloudCondition",
+                                                "aws-us-gov",
+                                                "aws"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            "Condition": {
+                                "Bool": {
+                                    "aws:SecureTransport": "false"
+                                }
+                            }
+                        },
+                        {
+                            "Sid": "EnforceEncryptionOnPut",
+                            "Effect": "Deny",
+                            "Principal": "*",
+                            "Action": "s3:PutObject",
+                            "Resource": {
+                                "Fn::Sub": [
+                                    "arn:${Partition}:s3:::${rWebContentBucket}/*",
+                                    {
+                                        "Partition": {
+                                            "Fn::If": [
+                                                "GovCloudCondition",
+                                                "aws-us-gov",
+                                                "aws"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            "Condition": {
+                                "StringNotEquals": {
+                                    "s3:x-amz-server-side-encryption": "AES256"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "rSecurityGroupWeb": {
+            "Value": {
+                "Ref": "rSecurityGroupWeb"
+            }
+        },
+        "rSecurityGroupApp": {
+            "Value": {
+                "Ref": "rSecurityGroupApp"
+            }
+        }
+    }
+}
