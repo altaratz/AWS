@@ -1,4 +1,4 @@
-#quickstart-common
+# AWS quickstart-common
 
 This is a modified version of the AWS best practice quick start
 source project: https://github.com/aws-quickstart/quickstart-compliance-nist
@@ -20,7 +20,7 @@ The Quick Start will deploy a standard web architecture using multiple VPCs.
 For architectural details, best practices, step-by-step instructions, and customization options, see the 
 [deployment guide](https://fwd.aws/n3zr6).
 
-##TBD
+## TBD
 * Automate pre steps
 * Dynamic network CIDR
 * Increase number of availability zones
