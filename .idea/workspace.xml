@@ -2,28 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58f8c40b-c2f6-40f2-8cef-91ad94236f94" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/quickstart-compliance-common.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/AWS-quickstart.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/AWS-quickstart.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/application.template.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/config-rules.template.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/iam.template.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/logging.template.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/main.template.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/vpc-management.template.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/vpc-production.template.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/config-rules.template" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/iam.template" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/logging.template" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/nat-instance.template" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/vpc-management.template" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/vpc-production.template" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/nat-production.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/application.template.json" beforeDir="false" afterPath="$PROJECT_DIR$/templates/application.template.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main.template.json" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main.template.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/vpc-management.template.json" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vpc-management.template.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/vpc-production.template.json" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vpc-production.template.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,10 +21,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/config-rules.template.json">
+        <entry file="file://$PROJECT_DIR$/templates/vpc-production.template.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="136" column="29" selection-start-line="136" selection-start-column="26" selection-end-line="136" selection-end-column="29" />
+            <state relative-caret-position="1650">
+              <caret line="221" column="21" selection-start-line="221" selection-start-column="16" selection-end-line="221" selection-end-column="21" />
+              <folding>
+                <element signature="n#!!block;n#Parameters#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/logging.template.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="653" column="21" lean-forward="true" selection-start-line="653" selection-start-column="21" selection-end-line="653" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -48,36 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/application.template.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="135" column="10" selection-start-line="135" selection-start-column="10" selection-end-line="135" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NOTICE.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/main.template.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="335" column="10" lean-forward="true" selection-start-line="335" selection-start-column="10" selection-end-line="335" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/vpc-production.template.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2134">
-              <caret line="684" column="10" selection-start-line="684" selection-start-column="10" selection-end-line="684" selection-end-column="10" />
+            <state relative-caret-position="210">
+              <caret line="14" column="58" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -86,10 +54,60 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="101">
-                <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+              <first_editor relative-caret-position="360">
+                <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/vpc-management.template.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-513">
+              <caret line="115" column="21" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/AWS-quickstart.jpg">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="701">
+              <caret line="66" selection-start-line="66" selection-end-line="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/main.template.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="375" column="78" selection-start-line="375" selection-start-column="50" selection-end-line="375" selection-end-column="78" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/config-rules.template.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="701">
+              <caret line="136" column="29" selection-start-line="136" selection-start-column="26" selection-end-line="136" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/nat-production.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -98,36 +116,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>db</find>
-      <find>CreateRole</find>
+      <find>0.0.0.0</find>
+      <find>rRouteMgmtIGW</find>
+      <find>route</find>
+      <find>rGWAttachmentMgmtIGW</find>
+      <find>AWS::EC2::Subnet</find>
+      <find>AWS::EC2::Subnet&quot;</find>
+      <find>eip</find>
+      <find>&quot;AWS::EC2::EIP&quot;</find>
+      <find>&quot;AWS::EC2::Subnet&quot;</find>
+      <find>InternetGateway&quot;</find>
+      <find>rIGWProd</find>
+      <find>pProductionCIDR</find>
+      <find>pProductionVPC</find>
+      <find>rVPCProduction</find>
+      <find>rRouteTableMgmtPrivate</find>
+      <find>rRouteTableMgmtDMZ</find>
       <find>manage</find>
-      <find>confi</find>
-      <find>templa</find>
-      <find>resources:</find>
-      <find>loggin</find>
-      <find>iam:CreateRole</find>
-      <find>configruleste</find>
-      <find>iam</find>
-      <find>bastio</find>
-      <find>AWSAMIRegionMap</find>
-      <find>pVPCTenancy</find>
-      <find>pEC2KeyPair</find>
-      <find>buck</find>
-      <find>10.</find>
-      <find>10.100</find>
-      <find>Bastion AMI</find>
-      <find>prod</find>
-      <find>private</find>
-      <find>bastion</find>
-      <find>pAppPrivateSubnetA</find>
-      <find>pRegionAZ1Name</find>
-      <find>pAppPrivateSubnetACIDR</find>
-      <find>application.template.json</find>
-      <find>appl</find>
-      <find>AppPrivateSubnetAssociationA</find>
-      <find>rS3AccessLogsPolicy</find>
-      <find>IAM</find>
-      <find>account-config-best-practice</find>
+      <find>VPC-</find>
+      <find>peer</find>
+      <find>ProductionVpc</find>
+      <find>ProductionVpcTemplate</find>
+      <find>&quot;Ref&quot;: &quot;rRouteTableMain&quot;</find>
+      <find>rPeeringConnectionProduction</find>
+      <find>rRouteTableMain</find>
+      <find>appli</find>
+      <find>pRouteTableProdPrivate</find>
+      <find>rRouteTableProdPrivateA</find>
+      <find>rIGWManagement</find>
+      <find>rVPCManagement</find>
+      <find>false</find>
     </findStrings>
     <replaceStrings>
       <replace>https://s3.amazonaws.com/account-config-best-practice/templates/</replace>
@@ -136,6 +154,7 @@
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/templates</dir>
+      <dir>$PROJECT_DIR$</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -147,24 +166,26 @@
         <option value="$USER_HOME$/Downloads/main (1).template" />
         <option value="$PROJECT_DIR$/templates/main.template" />
         <option value="$PROJECT_DIR$/templates/logging.template.json" />
-        <option value="$PROJECT_DIR$/templates/vpc-management.template.json" />
         <option value="$PROJECT_DIR$/templates/iam.template.json" />
         <option value="$PROJECT_DIR$/templates/config-rules.template.json" />
         <option value="$PROJECT_DIR$/templates/main2.json" />
         <option value="$PROJECT_DIR$/templates/application.template" />
         <option value="$PROJECT_DIR$/templates/vpc-production.template" />
-        <option value="$PROJECT_DIR$/templates/vpc-production.template.json" />
-        <option value="$PROJECT_DIR$/templates/application.template.json" />
+        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/templates/nat-production.json" />
+        <option value="$PROJECT_DIR$/templates/vpc-management.template.json" />
+        <option value="$PROJECT_DIR$/templates/application.template.json" />
         <option value="$PROJECT_DIR$/templates/main.template.json" />
+        <option value="$PROJECT_DIR$/templates/vpc-production.template.json" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="98" />
-    <option name="y" value="85" />
+    <option name="x" value="31" />
+    <option name="y" value="23" />
     <option name="width" value="1400" />
-    <option name="height" value="877" />
+    <option name="height" value="1014" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -172,6 +193,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -193,7 +215,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -232,17 +253,21 @@
       <workItem from="1550498694890" duration="30000" />
       <workItem from="1550498734210" duration="3257000" />
       <workItem from="1550561481354" duration="160000" />
-      <workItem from="1550561661470" duration="13541000" />
+      <workItem from="1550561661470" duration="17627000" />
+      <workItem from="1551769779174" duration="12303000" />
+      <workItem from="1552113230660" duration="289000" />
+      <workItem from="1552199877834" duration="9205000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16988000" />
+    <option name="totallyTimeSpent" value="42871000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="98" y="85" width="1400" height="877" extended-state="0" />
+    <frame x="31" y="23" width="1400" height="1014" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49936306" visible="true" weight="0.26435935" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49936306" visible="true" weight="0.27540502" />
       <window_info id="Structure" order="1" sideWeight="0.50063694" side_tool="true" weight="0.2569956" />
       <window_info id="Favorites" order="2" sideWeight="0.50063694" side_tool="true" weight="0.2569956" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -255,7 +280,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32939634" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.15906563" />
       <window_info anchor="bottom" id="Python Console" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -300,41 +325,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/vpc-management.template">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="129" column="19" selection-end-line="602" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/vpc-management.template.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="45" lean-forward="true" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/iam.template">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="126" column="20" lean-forward="true" selection-end-line="324" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/main (1).template">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="396" column="23" selection-end-line="548" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/logging.template.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="651" column="72" selection-start-line="651" selection-start-column="72" selection-end-line="651" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/vpc-management.template" />
+    <entry file="file://$PROJECT_DIR$/templates/iam.template" />
+    <entry file="file://$USER_HOME$/Downloads/main (1).template" />
     <entry file="file://$PROJECT_DIR$/templates/iam.template.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
@@ -342,80 +335,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/logging.template">
+    <entry file="file://$PROJECT_DIR$/templates/logging.template" />
+    <entry file="file://$PROJECT_DIR$/templates/config-rules.template" />
+    <entry file="file://$PROJECT_DIR$/templates/nat-instance.template" />
+    <entry file="file://$PROJECT_DIR$/templates/main2.json" />
+    <entry file="file://$PROJECT_DIR$/templates/application.template" />
+    <entry file="file://$PROJECT_DIR$/templates/vpc-production.template" />
+    <entry file="file://$PROJECT_DIR$/resources/AWS quickstart" />
+    <entry file="file://$PROJECT_DIR$/NOTICE.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/logging.template.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="507" column="24" selection-start-line="507" selection-start-column="24" selection-end-line="507" selection-end-column="24" />
+        <state relative-caret-position="252">
+          <caret line="653" column="21" lean-forward="true" selection-start-line="653" selection-start-column="21" selection-end-line="653" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/config-rules.template">
+    <entry file="file://$PROJECT_DIR$/templates/nat-production.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="101" column="18" selection-start-line="101" selection-start-column="15" selection-end-line="101" selection-end-column="18" />
+        <state relative-caret-position="240">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="701">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/config-rules.template.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
+        <state relative-caret-position="701">
           <caret line="136" column="29" selection-start-line="136" selection-start-column="26" selection-end-line="136" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/nat-instance.template">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="109" column="12" selection-start-line="109" selection-start-column="8" selection-end-line="109" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/main2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="648" column="50" selection-start-line="648" selection-start-column="50" selection-end-line="648" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/application.template">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="26" column="39" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/vpc-production.template">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="1229" column="22" lean-forward="true" selection-start-line="1229" selection-start-column="22" selection-end-line="1229" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/vpc-production.template.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2134">
-          <caret line="684" column="10" selection-start-line="684" selection-start-column="10" selection-end-line="684" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/application.template.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="135" column="10" selection-start-line="135" selection-start-column="10" selection-end-line="135" selection-end-column="10" />
+        <state relative-caret-position="210">
+          <caret line="14" column="58" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NOTICE.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/resources/AWS-quickstart.jpg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/AWS quickstart">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/templates/vpc-production.template.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1650">
+          <caret line="221" column="21" selection-start-line="221" selection-start-column="16" selection-end-line="221" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!block;n#Parameters#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/vpc-management.template.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-513">
+          <caret line="115" column="21" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="21" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="101">
-            <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+          <first_editor relative-caret-position="360">
+            <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
           </first_editor>
           <second_editor />
         </state>
@@ -423,8 +412,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/main.template.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="335" column="10" lean-forward="true" selection-start-line="335" selection-start-column="10" selection-end-line="335" selection-end-column="10" />
+        <state relative-caret-position="218">
+          <caret line="375" column="78" selection-start-line="375" selection-start-column="50" selection-end-line="375" selection-end-column="78" />
         </state>
       </provider>
     </entry>

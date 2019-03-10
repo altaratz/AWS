@@ -319,7 +319,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/account-config-best-practice/templates/iam.template.json",
+                        "https://s3.amazonaws.com/account-config-best-practice-devx/templates/iam.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -339,7 +339,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/account-config-best-practice/templates/logging.template.json",
+                        "https://s3.amazonaws.com/account-config-best-practice-devx/templates/logging.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -373,7 +373,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/account-config-best-practice/templates/vpc-production.template.json",
+                        "https://s3.amazonaws.com/account-config-best-practice-devx/templates/vpc-production.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -410,6 +410,8 @@
                     "pManagementCIDR": "10.10.0.0/16",
                     "pAppPrivateSubnetACIDR": "10.100.96.0/21",
                     "pAppPrivateSubnetBCIDR": "10.100.119.0/21",
+                    "pDBPrivateSubnetACIDR": "10.100.194.0/21",
+                    "pDBPrivateSubnetBCIDR": "10.100.212.0/21",
                     "pVPCTenancy": {
                         "Ref": "pVPCTenancy"
                     },
@@ -465,7 +467,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/account-config-best-practice/templates/vpc-management.template.json",
+                        "https://s3.amazonaws.com/account-config-best-practice-devx/templates/vpc-management.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -485,10 +487,16 @@
                             "Outputs.rVPCProduction"
                         ]
                     },
-                    "pRouteTableProdPrivate": {
+                    "pRouteTableProdPrivateA": {
                         "Fn::GetAtt": [
                             "ProductionVpcTemplate",
-                            "Outputs.rRouteTableProdPrivate"
+                            "Outputs.rRouteTableProdPrivateA"
+                        ]
+                    },
+                     "pRouteTableProdPrivateB": {
+                        "Fn::GetAtt": [
+                            "ProductionVpcTemplate",
+                            "Outputs.rRouteTableProdPrivateB"
                         ]
                     },
                     "pRouteTableProdPublic": {
@@ -601,7 +609,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/account-config-best-practice/templates/config-rules.template.json",
+                        "https://s3.amazonaws.com/account-config-best-practice-devx/templates/config-rules.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -631,7 +639,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/account-config-best-practice/templates/application.template.json",
+                        "https://s3.amazonaws.com/account-config-best-practice-devx/templates/application.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -685,7 +693,18 @@
                             "Outputs.rAppPrivateSubnetB"
                         ]
                     },
-
+                    "pDBPrivateSubnetA": {
+                        "Fn::GetAtt": [
+                            "ProductionVpcTemplate",
+                            "Outputs.rDBPrivateSubnetA"
+                        ]
+                    },
+                    "pDBPrivateSubnetB": {
+                        "Fn::GetAtt": [
+                            "ProductionVpcTemplate",
+                            "Outputs.rDBPrivateSubnetB"
+                        ]
+                    },
                     "pManagementCIDR": "10.10.0.0/16",
                     "pRegionAZ1Name": {
                         "Fn::Select": [
@@ -723,7 +742,6 @@
                 }
             }
         }
-
     },
     "Outputs": {
         "TemplateType": {

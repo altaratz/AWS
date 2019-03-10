@@ -40,6 +40,8 @@
                         "pDMZSubnetBCIDR",
                         "pAppPrivateSubnetACIDR",
                         "pAppPrivateSubnetBCIDR",
+                        "pDBPrivateSubnetACIDR",
+                        "pDBPrivateSubnetBCIDR",
                         "pEC2KeyPair",
                         "pVPCTenancy"
                     ]
@@ -72,6 +74,12 @@
                 },
                 "pAppPrivateSubnetBCIDR": {
                     "default": "CIDR block of Application A subnet (private)"
+                },
+                "pDBPrivateSubnetACIDR": {
+                    "default": "CIDR block of Database A subnet (private)"
+                },
+                "pDBPrivateSubnetBCIDR": {
+                    "default": "CIDR block of Database B subnet (private)"
                 },
                 "pEC2KeyPair": {
                     "default": "Name of existing SSH Key for NAT Instance"
@@ -135,6 +143,16 @@
             "Description": "CIDR block for Application AZ-1b subnet",
             "Type": "String",
             "Default": "10.100.119.0/21"
+        },
+        "pDBPrivateSubnetACIDR": {
+            "Description": "CIDR block for Private AZ-1a subnet",
+            "Type": "String",
+            "Default": "10.100.194.0/21"
+        },
+        "pDBPrivateSubnetBCIDR": {
+            "Description": "CIDR block for Private AZ-1b subnet",
+            "Type": "String",
+            "Default": "10.100.212.0/21"
         },
         "pEC2KeyPair": {
             "Description": "Name of existing EC2 key pair for production hosts",
@@ -461,6 +479,58 @@
                 ]
             }
         },
+        "rDBPrivateSubnetA": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": {
+                    "Ref": "pDBPrivateSubnetACIDR"
+                },
+                "AvailabilityZone": {
+                    "Ref": "pRegionAZ1Name"
+                },
+                "VpcId": {
+                    "Ref": "rVPCProduction"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Production DB Subnet A"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": {
+                            "Ref": "pEnvironment"
+                        }
+                    }
+                ]
+            }
+        },
+        "rDBPrivateSubnetB": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": {
+                    "Ref": "pDBPrivateSubnetBCIDR"
+                },
+                "AvailabilityZone": {
+                    "Ref": "pRegionAZ2Name"
+                },
+                "VpcId": {
+                    "Ref": "rVPCProduction"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Production DB Subnet B"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": {
+                            "Ref": "pEnvironment"
+                        }
+                    }
+                ]
+            }
+        },
         "rIGWProd": {
             "Type": "AWS::EC2::InternetGateway",
             "Properties": {
@@ -691,6 +761,28 @@
                 },
                 "SubnetId": {
                     "Ref": "rAppPrivateSubnetB"
+                }
+            }
+        },
+        "rRouteAssocDBPrivateA": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rRouteTableProdPrivateA"
+                },
+                "SubnetId": {
+                    "Ref": "rDBPrivateSubnetA"
+                }
+            }
+        },
+        "rRouteAssocDBPrivateB": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rRouteTableProdPrivateB"
+                },
+                "SubnetId": {
+                    "Ref": "rDBPrivateSubnetB"
                 }
             }
         },
@@ -957,7 +1049,7 @@
                 }
             }
         },
-         "rNACLAssocAppPrivSubnetA": {
+        "rNACLAssocAppPrivSubnetA": {
             "Type": "AWS::EC2::SubnetNetworkAclAssociation",
             "Properties": {
                 "NetworkAclId": {
@@ -965,6 +1057,28 @@
                 },
                 "SubnetId": {
                     "Ref": "rAppPrivateSubnetA"
+                }
+            }
+        },
+        "rNACLAssocDBPrivSubnetA": {
+            "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+            "Properties": {
+                "NetworkAclId": {
+                    "Ref": "rNACLPrivate"
+                },
+                "SubnetId": {
+                    "Ref": "rDBPrivateSubnetA"
+                }
+            }
+        },
+        "rNACLAssocDBPrivSubnetB": {
+            "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+            "Properties": {
+                "NetworkAclId": {
+                    "Ref": "rNACLPrivate"
+                },
+                "SubnetId": {
+                    "Ref": "rDBPrivateSubnetB"
                 }
             }
         },
@@ -1067,7 +1181,7 @@
                 "Ref": "rDMZSubnetB"
             }
         },
-        "rRouteTableProdPrivate": {
+        "rRouteTableProdPrivateA": {
             "Value": {
                 "Ref": "rRouteTableProdPrivateA"
             }
@@ -1082,7 +1196,7 @@
                 "Ref": "rRouteTableMain"
             }
         },
-         "rAppPrivateSubnetA": {
+        "rAppPrivateSubnetA": {
             "Value": {
                 "Ref": "rAppPrivateSubnetA"
             }
@@ -1090,6 +1204,16 @@
         "rAppPrivateSubnetB": {
             "Value": {
                 "Ref": "rAppPrivateSubnetB"
+            }
+        },
+        "rDBPrivateSubnetA": {
+            "Value": {
+                "Ref": "rDBPrivateSubnetA"
+            }
+        },
+        "rDBPrivateSubnetB": {
+            "Value": {
+                "Ref": "rDBPrivateSubnetB"
             }
         },
         "rNACLPrivate": {

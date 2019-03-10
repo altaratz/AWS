@@ -41,7 +41,6 @@
                         "pAppPrivateSubnetB"
                     ]
                 }
-
             ]
         }
     },
@@ -87,6 +86,14 @@
         },
         "pAppPrivateSubnetB": {
             "Description": "WebApp Subnet A",
+            "Type": "AWS::EC2::Subnet::Id"
+        },
+        "pDBPrivateSubnetA": {
+            "Description": "rDBPrivateSubnetA",
+            "Type": "AWS::EC2::Subnet::Id"
+        },
+        "pDBPrivateSubnetB": {
+            "Description": "rDBPrivateSubnetB",
             "Type": "AWS::EC2::Subnet::Id"
         },
         "pRegionAZ1Name": {
@@ -368,6 +375,37 @@
                 ]
             }
         },
+        "rSecurityGroupRDS": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Port 3306 database for access",
+                "VpcId": {
+                    "Ref": "pProductionVPC"
+                },
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 3306,
+                        "ToPort": 3306,
+                        "SourceSecurityGroupId": {
+                            "Ref": "rSecurityGroupAppInstance"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "sg-database-access"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": {
+                            "Ref": "pEnvironment"
+                        }
+                    }
+                ]
+            }
+        },
         "rWebContentBucket": {
             "Type": "AWS::S3::Bucket",
             "Properties": {
@@ -459,8 +497,23 @@
                     ]
                 }
             }
+        },
+        "rDBSubnetGroup": {
+            "Type": "AWS::RDS::DBSubnetGroup",
+            "Properties": {
+                "DBSubnetGroupDescription": "MySQL RDS Subnet Group",
+                "SubnetIds": [
+                    {
+                        "Ref": "pDBPrivateSubnetA"
+                    },
+                    {
+                        "Ref": "pDBPrivateSubnetB"
+                    }
+                ]
+            }
         }
     },
+
     "Outputs": {
         "rSecurityGroupWeb": {
             "Value": {

@@ -119,14 +119,14 @@
         "pManagementDMZSubnetPublicIP": {
             "Description": "Should Public IPs be auto-assigned to instances launched in the DMZ subnet(s)?",
             "Type": "String",
-            "Default": false,
+            "Default": true,
             "AllowedValues": [
                 true,
                 false
             ]
         },
         "pProductionVPC": {
-            "Description": "Production VPC to peer with (optional)",
+            "Description": "Production VPC to peer  (optional)",
             "Type": "String",
             "Default": ""
         },
@@ -135,8 +135,13 @@
             "Type": "String",
             "Default": ""
         },
-        "pRouteTableProdPrivate": {
-            "Description": "Route Table ID for Prod VPC Private",
+        "pRouteTableProdPrivateA": {
+            "Description": "Route Table ID for Prod VPC Private A",
+            "Type": "String",
+            "Default": ""
+        },
+        "pRouteTableProdPrivateB": {
+            "Description": "Route Table ID for Prod VPC Private B",
             "Type": "String",
             "Default": ""
         },
@@ -904,12 +909,27 @@
                 }
             }
         },
-        "rRouteProdMgmt": {
+        "rRouteProdMgmtA": {
             "Condition": "cCreatePeeringProduction",
             "Type": "AWS::EC2::Route",
             "Properties": {
                 "RouteTableId": {
-                    "Ref": "pRouteTableProdPrivate"
+                    "Ref": "pRouteTableProdPrivateA"
+                },
+                "VpcPeeringConnectionId": {
+                    "Ref": "rPeeringConnectionProduction"
+                },
+                "DestinationCidrBlock": {
+                    "Ref": "pManagementCIDR"
+                }
+            }
+        },
+                "rRouteProdMgmtB": {
+            "Condition": "cCreatePeeringProduction",
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "pRouteTableProdPrivateB"
                 },
                 "VpcPeeringConnectionId": {
                     "Ref": "rPeeringConnectionProduction"
