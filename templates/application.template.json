@@ -354,8 +354,8 @@
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": 3306,
-                        "ToPort": 3306,
+                        "FromPort": 5432,
+                        "ToPort": 5432,
                         "CidrIp": {
                             "Ref": "pProductionCIDR"
                         }
@@ -378,15 +378,15 @@
         "rSecurityGroupRDS": {
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
-                "GroupDescription": "Port 3306 database for access",
+                "GroupDescription": "Port 5432 database for access",
                 "VpcId": {
                     "Ref": "pProductionVPC"
                 },
                 "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": 3306,
-                        "ToPort": 3306,
+                        "FromPort": 5432,
+                        "ToPort": 5432,
                         "SourceSecurityGroupId": {
                             "Ref": "rSecurityGroupAppInstance"
                         }
