@@ -21,19 +21,19 @@ The Quick Start will deploy a standard web architecture using multiple VPCs.
 Security groups preconfiguration was made to harden security  
 Sample Security groups created by the template:  
    
-|SG Name | Porpose | Note
-|--|--|--|--|
-| sg-web-access-ports-from-production | Allow NAT from production |Should be attached for production instances
-|sg-enable-ssh-access|Enable SSH access inside the Production subnet|Should be attached for production instances
-|sg-ssh-access-from-management-vpc|Allow Access to Bastion from anywhere|
-|sg-web-access-ports-from-production|Allow NAT from Management VPC|
-|sg-ssh-access-from-management|Enable Bastion to access production |Should be attached for production instances
-|sg-ssh-access-from-bastion|SG for Bastion Instances|
-|sg-reverse-proxy-dmz-instances|Security group for Reverse Proxy Instances in DMZ|
-|sg-reverse-proxy-dmz|Security group for Reverse Proxy in DMZ|
-|sg-database-access|Port 3306/5432 database for access| Make sure the DB matches your DB
-|sg-app-server-elb-instances|Security group for Appserver Instances|Should be attached for production instances|
-|sg-app-server-elb|Security group for Appservers ELB|Should be attached for production instances|
+| __SG Name__ | __Purpose__ | __Note__ |
+| --- | :---: | ---: |
+| from-production | Allow NAT from production | Should be attached for production instances |
+| sg-enable-ssh-access | Enable SSH access inside the Production subnet | Should be attached for production instances |
+| sg-ssh-access-from-management-vpc | Allow Access to Bastion from anywhere | |
+| sg-web-access-ports-from-production | Allow NAT from Management VPC | |
+| sg-ssh-access-from-management | Enable Bastion to access production | Should be attached for production instances |
+| sg-ssh-access-from-bastion | SG for Bastion Instances | |
+| sg-reverse-proxy-dmz-instances | Security group for Reverse Proxy Instances in DMZ | |
+| sg-reverse-proxy-dmz | Security group for Reverse Proxy in DMZ | |
+| sg-database-access | Port 3306/5432 database for access | Make sure the DB matches your DB |
+| sg-app-server-elb-instances | Security group for Appserver Instances | Should be attached for production instances |
+| sg-app-server-elb | Security group for Appservers ELB | Should be attached for production instances |
 
 **Important**: Make sure the security group matches your usage intention (ports, inbounds/outbounds, etc)
 
