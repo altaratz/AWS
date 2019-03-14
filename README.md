@@ -47,6 +47,7 @@ Please make sure the Inbound and Outbound rules matches your usage
 * Ensure that you have manually set up AWS Config in the AWS Config console, if you are deploying into an AWS Region where AWS Config is available. AWS Config is currently available in the regions listed in AWS Regions and Endpoints.  
 
 ### On the created AWS account
+* Upload the template folder to S3 bucket on your AWS account
 * Enable Config service
 * Create EC2 keys for bastion and default instance group  
 * Open a case - Increase number of EIP (to at least 25)  
