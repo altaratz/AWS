@@ -319,7 +319,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/iam.template.json",
+                        "https://github.com/kinecosystem/aws-best-practice-CF/tree/master/templates/iam.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -339,7 +339,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/logging.template.json",
+                        "https://github.com/kinecosystem/aws-best-practice-CF/tree/master/templates/logging.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -373,7 +373,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/vpc-production.template.json",
+                        "https://github.com/kinecosystem/aws-best-practice-CF/tree/master/templates/vpc-production.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -467,7 +467,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/vpc-management.template.json",
+                        "https://github.com/kinecosystem/aws-best-practice-CF/tree/master/templates/vpc-management.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -609,7 +609,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/config-rules.template.json",
+                        "https://github.com/kinecosystem/aws-best-practice-CF/tree/master/templates/config-rules.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -639,7 +639,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/application.template.json",
+                        "https://github.com/kinecosystem/aws-best-practice-CF/tree/master/templates/application.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
