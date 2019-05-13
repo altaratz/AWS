@@ -36,9 +36,7 @@
                         "default": "AWS Quick Start Configuration"
                     },
                     "Parameters": [
-                        "QSS3BucketName",
-                        "QSS3KeyPrefix"
-                    ]
+                        "QSS3BucketName"]
                 }
             ],
             "ParameterLabels": {
@@ -62,9 +60,6 @@
                 },
                 "QSS3BucketName": {
                     "default": "Quick Start S3 Bucket Name"
-                },
-                "QSS3KeyPrefix": {
-                    "default": "Quick Start S3 Key Prefix"
                 }
             }
         }
@@ -73,7 +68,7 @@
         "pNotifyEmail": {
             "Description": "Notification email address for security events (you will receive a confirmation email)",
             "Type": "String",
-            "Default": "devops@kinecosystem.com"
+            "Default": "devops@kin.org"
         },
         "pEC2KeyPairBastion": {
             "Description": "The SSH key pair in your account to use for the bastion host login",
@@ -110,13 +105,6 @@
             "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, periods (.), and hyphens (-). It cannot start or end with a hyphen (-).",
             "Default": "aws-quickstart",
             "Description": "S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
-            "Type": "String"
-        },
-        "QSS3KeyPrefix": {
-            "AllowedPattern": "^[0-9a-zA-Z-/]*$",
-            "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
-            "Default": "quickstart-compliance-nist/",
-            "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
             "Type": "String"
         }
     },
@@ -319,7 +307,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/iam.template.json",
+                        "https://s3.amazonaws.com/${QSS3BucketName}/templates/iam.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -339,7 +327,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/logging.template.json",
+                        "https://s3.amazonaws.com/${QSS3BucketName}/templates/logging.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -373,7 +361,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/vpc-production.template.json",
+                        "https://s3.amazonaws.com/${QSS3BucketName}/templates/vpc-production.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -454,9 +442,6 @@
                     },
                     "QSS3BucketName": {
                         "Ref": "QSS3BucketName"
-                    },
-                    "QSS3KeyPrefix": {
-                        "Fn::Sub": "${QSS3KeyPrefix}submodules/quickstart-compliance-common/"
                     }
                 }
             }
@@ -467,7 +452,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/vpc-management.template.json",
+                        "https://s3.amazonaws.com/${QSS3BucketName}/templates/vpc-management.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -590,9 +575,6 @@
                     },
                     "QSS3BucketName": {
                         "Ref": "QSS3BucketName"
-                    },
-                    "QSS3KeyPrefix": {
-                        "Fn::Sub": "${QSS3KeyPrefix}submodules/quickstart-compliance-common/"
                     }
                 }
             }
@@ -609,7 +591,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/config-rules.template.json",
+                        "https://s3.amazonaws.com/${QSS3BucketName}/templates/config-rules.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -639,7 +621,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://s3.amazonaws.com/${QSS3KeyPrefix}/templates/application.template.json",
+                        "https://s3.amazonaws.com/${QSS3BucketName}/templates/application.template.json",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
